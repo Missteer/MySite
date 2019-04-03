@@ -1,4 +1,4 @@
-"""mblog URL Configuration
+"""web01 URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.1/topics/http/urls/
@@ -15,12 +15,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import include,url
-from mainsite.views import homepage,showpost
+from django.conf.urls import url,include
+#导入视图
+#from web01.hello import views
+#from web01.hello import views
+#from web01.miss import views
+from hello import views as v
 
+
+
+#导入路由
+from rest_framework import routers
+
+router = routers.SimpleRouter()
+
+router.register(r'student',v.StudentVS)
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #url(r'^admin/',include(admin.site.urls))
-    url(r'^mblog/',homepage),
-    url(r'^post/(\w+)$',showpost)
+    #需要把drf路由当作子路由，配置好
+    url(r'^api/',include(router.urls))
 ]
