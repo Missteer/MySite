@@ -21,3 +21,19 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Product(models.Model):
+    SIZE = (
+        ('S','Smaill'),
+        ('M','Medium'),
+        ('L','Large'),
+    )
+
+    sku = models.CharField(max_length=200)
+    name = models.CharField(max_length=10)
+    price = models.PositiveIntegerField()
+    size = models.CharField(max_length=1,choices=SIZE)
+
+    def __str__(self):
+        return self.name
