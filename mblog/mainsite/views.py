@@ -4,6 +4,8 @@ from .models import Post
 from django.template.loader import get_template
 from datetime import datetime
 from django.shortcuts import redirect
+
+
 # Create your views here.
 
 def homepage(request):
