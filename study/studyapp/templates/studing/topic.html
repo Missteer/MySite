@@ -1,0 +1,21 @@
+{% extends 'studing/base.html'%}
+
+{% block content%}
+<p>
+   主题:{{topic}}
+</p>
+<p>条目:</p>
+<ul>
+{% for entry in entries %}
+    <li>
+    {{ entry.data_added|date:'M d,Y H:i'}}
+    {{ entry.text|linebreaks}}
+    </li>
+{% empty %}
+    这里没有条目
+
+    <a href="{% url 'studyapp:add_entry' topic.id %}">添加条目</a>
+{% endfor%}
+
+</ul>
+{% endblock content%}

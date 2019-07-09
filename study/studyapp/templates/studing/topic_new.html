@@ -1,0 +1,11 @@
+{% extends 'studing/base.html'%}
+{% block content %}
+<p>添加一个主题</p>
+<form action="{% url 'studyapp:topic_new'%}" method="post">
+    {% csrf_token %}
+    {{form}}
+    <button name="submit">添加</button>
+</form>
+
+
+{% endblock content %}

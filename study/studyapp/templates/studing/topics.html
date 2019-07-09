@@ -1,0 +1,19 @@
+{% extends "studing/base.html" %}
+
+{% block content %}
+<p>主题:</p>
+<ul>
+    {% for topic in topics%}
+        <li>
+            <a href="{% url 'studyapp:topic' topic.id %}">
+            {{topic}}
+            </a>
+        </li>
+    {% empty %}
+        <li>没有主题，或者主题是空的</li>
+    {% endfor %}
+    <a href="{% url 'studyapp:topic_new' %}">添加主题</a>
+</ul>
+{% endblock content%}
+
+

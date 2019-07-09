@@ -1,9 +1,14 @@
 <p>
     <a href="{% url 'learning_logs:index' %}">Learning Log</a>-
-    <a href="{% url 'learning_logs:topics' %}">Topics</a>
+    <a href="{% url 'learning_logs:topics' %}">Topics</a> -
+    {% if user.is_authenticted %}
+        hello,{{user.username}}
+    {% else %}
+        <a href="{% url 'users:login' %}">login</a>
+    {% endif %}
     <!--这里的index和app下urls里的name=‘index’要保持一致-->
     <!--在这个实例中，模板标签{% url 'learning_logs:index' %}，-->
-    <!--生成一个URL，该URL与learning_logs/urls.py中定义的名为index的URL模式匹配-->
+    <!--生成一个URLa，该URL与learning_logs/urls.py中定义的名为index的URL模式匹配-->
     <!--在这 个示例中，learning_logs是一个命名空间，而index是该命名空间中一个名称独特的URL模式-->
 </p>
 
