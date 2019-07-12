@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('status', models.PositiveIntegerField(verbose_name='状态', default=1, choices=[(1, '正常'), (0, '删除')])),
                 ('is_nav', models.BooleanField(verbose_name='是否为导航', default=False)),
                 ('created_time', models.DateTimeField(verbose_name='创建时间', auto_now_add=True)),
-                ('owner', models.ForeignKey(verbose_name='作者', to=settings.AUTH_USER_MODEL)),
+                ('owner', models.ForeignKey(verbose_name='作者', to=settings.AUTH_USER_MODEL,on_delete=models.CASCADE)),
             ],
             options={
                 'verbose_name': '分类',
@@ -36,8 +36,8 @@ class Migration(migrations.Migration):
                 ('content', models.TextField(verbose_name='正文', help_text='正文必须是markdown格式')),
                 ('status', models.PositiveIntegerField(verbose_name='状态', default=1, choices=[(1, '正常'), (0, '删除'), (2, '草稿')])),
                 ('created_time', models.DateTimeField(verbose_name='创建时间', auto_now_add=True)),
-                ('category', models.ForeignKey(verbose_name='分类', to='blog.Category')),
-                ('owner', models.ForeignKey(verbose_name='作者', to=settings.AUTH_USER_MODEL)),
+                ('category', models.ForeignKey(verbose_name='分类', to='blog.Category',on_delete=models.CASCADE)),
+                ('owner', models.ForeignKey(verbose_name='作者', to=settings.AUTH_USER_MODEL,on_delete=models.CASCADE)),
             ],
             options={
                 'verbose_name': '文章',
@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(verbose_name='名称', max_length=10)),
                 ('status', models.PositiveIntegerField(verbose_name='状态', default=1, choices=[(1, '正常'), (0, '删除')])),
                 ('created_time', models.DateTimeField(verbose_name='创建时间', auto_now_add=True)),
-                ('owner', models.ForeignKey(verbose_name='作者', to=settings.AUTH_USER_MODEL)),
+                ('owner', models.ForeignKey(verbose_name='作者', to=settings.AUTH_USER_MODEL,on_delete=models.CASCADE)),
             ],
             options={
                 'verbose_name': '标签',

@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('email', models.EmailField(verbose_name='邮箱', max_length=254)),
                 ('status', models.PositiveIntegerField(verbose_name='状态', default=1, choices=[(1, '正常'), (0, '删除')])),
                 ('created_time', models.DateTimeField(verbose_name='创建时间', auto_now_add=True)),
-                ('target', models.ForeignKey(verbose_name='评论目标', to='blog.Post')),
+                ('target', models.ForeignKey(verbose_name='评论目标', to='blog.Post',on_delete=models.CASCADE)),
             ],
             options={
                 'verbose_name': '评论',

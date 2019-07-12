@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('status', models.PositiveIntegerField(verbose_name='状态', default=1, choices=[(1, '正常'), (0, '删除')])),
                 ('weight', models.PositiveIntegerField(verbose_name='权重', default=1, choices=[(1, 1), (2, 2), (3, 3), (4, 4), (5, 5)], help_text='权重高展示顺序靠前')),
                 ('created_time', models.DateTimeField(verbose_name='创建时间', auto_now_add=True)),
-                ('owner', models.ForeignKey(verbose_name='作者', to=settings.AUTH_USER_MODEL)),
+                ('owner', models.ForeignKey(verbose_name='作者', to=settings.AUTH_USER_MODEL,on_delete=models.CASCADE)),
             ],
             options={
                 'verbose_name': '友链',
