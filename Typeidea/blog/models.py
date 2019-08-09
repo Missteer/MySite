@@ -100,39 +100,30 @@ class Post(models.Model):
         return post_list, tag
 
 
-
     @staticmethod
-
     def get_by_category(category_id):
-
         try:
-
             category = Category.objects.get(id=category_id)
-
         except Category.DoesNotExist:
-
             category = None
-
             post_list = []
-
         else:
-
             post_list = category.post_set.filter(status=Post.STAUTS_NORMAL)\
                 .select_related('owner', 'category')
 
         return post_list, category
 
-
-
     @classmethod
-
     def latest_posts(cls):
-
-        queryset = cls.objects.filter(status=cls.STAUTS_NORMAL)
-
+        return cls.objects.filter(status=cls.STAUTS_NORMAL)
+        # posts = Post.objects.all()
+        # queryset = posts.filter(status=1)
+        #return queryset
     @classmethod
     def hot_posts(cls):
+
         '''最热文章'''
+        '''only，只获取 title,category 的内容， 其他值在获取时会产生额外的查'''
         return cls.objects.filter(status=cls.STAUTS_NORMAL).order_by('-pv').only('title','category')
 
 

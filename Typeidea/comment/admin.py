@@ -7,10 +7,10 @@ from Typeidea.base_admin import BaseOwnerAdmin
 
 #@admin.register(Comment)
 @admin.register(Comment,site=custom_site)
-class CommentAdmin(BaseOwnerAdmin):
+class CommentAdmin(admin.ModelAdmin):
     list_display = [
         'target','nickname','website','email','created_time',
-        'status'
+        'status',
     ]
 
     list_filter = [
