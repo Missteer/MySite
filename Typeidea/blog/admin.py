@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from django.urls import reverse
+#from django.urls import reverse
 from django.utils.html import format_html
 from .models import Category,Post,Tag
 from .adminforms import PostAdminForm

@@ -1,12 +1,12 @@
 from django.db.models import Q
-from django.shortcuts import render
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponse
+
 from django.views.generic import ListView,DetailView
 # Create your views here.
 from .models import Post,Tag,Category
 from config.models import SideBar
-
+from comment.forms import CommentForm
+from comment.models import Comment
 
 class CommonViewMixin:
     def get_context_data(self, **kwargs):
@@ -23,14 +23,26 @@ class CommonViewMixin:
 #     context_object_name = 'post_list'
 #     template_name = 'blog/list.html'
 
-class PostDetailView(DetailView):
-    model = Post
-    paginate_by = 1
+# class PostDetailView(DetailView):
+#     model = Post
+#     paginate_by = 1
+#     template_name = 'blog/detail.html'
+#     #context_object_name拿到要渲染到模板中的这个queryset名称
+#     context_object_name = 'post'
+#     pk_url_kwarg = 'post_id'
+class PostDetailView(CommonViewMixin,DetailView):
+    queryset = Post.latest_posts()
     template_name = 'blog/detail.html'
-    #context_object_name拿到要渲染到模板中的这个queryset名称
     context_object_name = 'post'
     pk_url_kwarg = 'post_id'
 
+    def get_context_data(self, **kwargs):
+        context = super(PostDetailView, self).get_context_data(**kwargs)
+        context.update({
+            'comment_form':CommentForm,
+            'comment_list':Comment.get_by_target(self.request.path),
+        })
+        return context
 
 
 class IndexView(CommonViewMixin,ListView):
