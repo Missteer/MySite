@@ -23,13 +23,16 @@ class Category(models.Model):
 
     @classmethod
     def get_navs(cls):
+        '''得到分类是否是导航'''
         categories = cls.objects.filter(status=cls.STATUS_NORMAL)
         nav_categories = []
         normal_categories = []
         for cate in categories:
             if cate.is_nav:
+                '''是导航的分类'''
                 nav_categories.append(cate)
             else:
+                '''不是导航的分类'''
                 normal_categories.append(cate)
         return {
             'navs':nav_categories,

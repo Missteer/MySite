@@ -1,0 +1,21 @@
+{% extends "./base.html" %}
+{% block title %}
+<!--title是指浏览器上显示的标题-->
+    {{post.title}}
+{% endblock %}
+
+{% block main %}
+
+    {% if post %}
+    <h1>{{ post.title }}</h1>
+    <div>
+        <span>分类:{{post.category.name}}</span>
+        <span>作者:{{post.owner.username}}</span>
+        <span>创建时间:{{ post.created_time}}</span>
+    </div>
+    <hr/>
+    <p>
+        {{post.content}}
+    </p>
+    {% endif %}
+{% endblock %}

@@ -58,25 +58,11 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'Typeidea.urls'
 
 THEME ='default'
-# TEMPLATES = [
-#     {
-#         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-#         'DIRS': [os.path.join(BASE_DIR,'themes',THEME,'templates')],
-#         'APP_DIRS': True,
-#         'OPTIONS': {
-#             'context_processors': [
-#                 'django.template.context_processors.debug',
-#                 'django.template.context_processors.request',
-#                 'django.contrib.auth.context_processors.auth',
-#                 'django.contrib.messages.context_processors.messages',
-#             ],
-#         },
-#     },
-# ]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'themes', THEME, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'Typeidea/themes/default/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
