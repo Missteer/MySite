@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
@@ -76,7 +77,6 @@ class TagView(IndexView):
         tag_id = self.kwargs.get('tag_id')
         return queryset.filter(tag_id=tag_id)
 
-
 # def post_list(request,category_id=None,tag_id=None):
 #     tag = None
 #     category = None
@@ -111,3 +111,41 @@ class TagView(IndexView):
 #     }
 #     context.update(Category.get_navs())
 #     return render(request,'blog/detail.html',context=context)
+class  SearchView(IndexView):
+    def get_context_data(self, **kwargs):
+        context = super(SearchView, self).get_context_data()
+        context.update(
+            {
+                'keyword':self.request.GET.get('keyword','')
+            }
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = super(SearchView, self).get_queryset()
+        keyword = self.request.GET.get('keyword')
+        if not keyword:
+            return queryset
+        return queryset.filter(Q(title__icontains=keyword) | Q(desc__icontains=keyword))
+
+
+class AuthorView(IndexView):
+    '''增加作者页面'''
+    def get_queryset(self):
+        queryset = super(AuthorView, self).get_queryset()
+        author_Id = self.kwargs.get('owner_id')
+        return queryset.filter(owner_id=author_Id)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
