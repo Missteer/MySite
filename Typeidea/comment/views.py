@@ -13,6 +13,7 @@ class CommentView(TemplateView):
         target = request.POST.get('target')
 
         if comment_form.is_valid():
+            '''Django之form组件is_valid校验机制 '''
             isinstance = comment_form.save(commit=False)
             isinstance.target = target
             isinstance.save()

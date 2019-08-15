@@ -124,22 +124,24 @@ class TagView(IndexView):
 #     context.update(Category.get_navs())
 #     return render(request,'blog/detail.html',context=context)
 class  SearchView(IndexView):
-    def get_context_data(self, **kwargs):
-        context = super(SearchView, self).get_context_data()
-        context.update(
-            {
-                'keyword':self.request.GET.get('keyword','')
-            }
-        )
-        return context
-
     def get_queryset(self):
+        '''调用get_queryset方法拿到数据'''
         queryset = super(SearchView, self).get_queryset()
         keyword = self.request.GET.get('keyword')
         if not keyword:
             return queryset
         return queryset.filter(Q(title__icontains=keyword) | Q(desc__icontains=keyword))
 
+    def get_context_data(self, **kwargs):
+        '''调用该方法，拿到需要渲染到模板的数据'''
+        context = super(SearchView, self).get_context_data()
+        '''context.update应该是“”{对于搜索来说，我们还需要将用户输入的关键词展示在输入框}'''
+        context.update(
+            {
+                'keyword':self.request.GET.get('keyword','你好')
+            }
+        )
+        return context
 
 class AuthorView(IndexView):
     '''增加作者页面'''

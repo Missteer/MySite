@@ -20,7 +20,7 @@
     {% endif %}
 <hr/>
     <div class="comment">
-        <form class="form-group" action="/comment/" method="POST">
+        <form class="form-group" action="{% url 'comment' %}" method="POST">
             {% csrf_token %}
             <input name="target" type="hidden" value="{{ request.path }}"/>
             {{ comment_form }}
